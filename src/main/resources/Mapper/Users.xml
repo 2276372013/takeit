@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.take.takeDemo.Dao.UserDao">
+
+
+    <!--@Description: no
+        @Author: whl
+        @Date: 2020/12/11 14:55 pm
+        @Version: 1.0.0-->
+
+    <!--返回集 -->
+    <resultMap id="backMap"
+               type="com.take.takeDemo.Entity.Users">
+    </resultMap>
+
+    <!--检索 -->
+    <select id="findByName" resultMap="backMap" parameterType="java.lang.String">
+        select * from users where username = #{user_name}
+    </select>
+
+    <!--修改用户信息 -->
+    <update id="updateById" parameterType="Users">
+        update users set userPassword = #{userPassword} where userId = #{userId}
+    </update>
+
+    <!--注册-->
+    <insert id="insertUser" parameterType="Users">
+        insert into users (username,userpassword) values (#{userName},#{userPassword})
+    </insert>
+
+
+
+</mapper>
