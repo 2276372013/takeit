@@ -29,6 +29,9 @@ class TakeDemoApplicationTests {
 				.sign(Algorithm.HMAC256("!@WHL@!"));//
 
 		System.out.println(token);
+		//eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.
+		// eyJ1c2VyTmFtZSI6InhpYW9odWEiLCJleHAiOjE2MTA3ODkwMjgsInVzZXJJZCI6MjF9.
+		// IyA8lnNQ8wjnVCYPF6NeawSyp3a205hn5gWJPouvqhw
 	}
 
 }
