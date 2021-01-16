@@ -16,4 +16,6 @@ public interface UserDao {
     Users findByName(@Param("user_name") String user_name);
     Integer updateById(Users user);
     Integer insertUser(Users user);
+    public int updateUserPassword(String passWord,String email);
+    public int checkUserEmail(String email);
 }
