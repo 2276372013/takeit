@@ -8,6 +8,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.mail.SimpleMailMessage;
 import org.springframework.mail.javamail.JavaMailSender;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Propagation;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.util.DigestUtils;
 
 /**
@@ -18,6 +20,7 @@ import org.springframework.util.DigestUtils;
  */
 
 @Service
+@Transactional
 public class UserServiceImpl implements UserService {
 
     @Autowired
@@ -26,11 +29,11 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private MD5Util md5Util;
 
-
     @Autowired
     private JavaMailSender mailSender;
 
     @Override
+    @Transactional(propagation = Propagation.SUPPORTS)
     public Boolean findByName(String userName, String userPassword) {
         Users user = userDao.findByName(userName);
         Boolean jiemi = null;
@@ -41,6 +44,7 @@ public class UserServiceImpl implements UserService {
             }
         } catch (Exception e) {
             e.printStackTrace();
+//            throw new RuntimeException("登录失败~~");
         }
         return false;
     }

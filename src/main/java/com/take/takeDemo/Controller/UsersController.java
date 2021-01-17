@@ -1,14 +1,16 @@
 package com.take.takeDemo.Controller;
 
-import com.take.takeDemo.Entity.Users;
+import com.take.takeDemo.Common.Util.JWTUtils;
 import com.take.takeDemo.Entity.Msg;
-import com.take.takeDemo.Service.ReturnMsgService;
+import com.take.takeDemo.Entity.Users;
 import com.take.takeDemo.Service.UserService;
 import com.take.takeDemo.Service.impl.ReturnMsgServiceImpl;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.Random;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @Description: no
@@ -18,6 +20,7 @@ import java.util.Random;
  */
 
 @RestController
+@Slf4j
 @CrossOrigin(origins= { "http://localhost:4200", "null" })
 public class UsersController {
 
@@ -31,34 +34,36 @@ public class UsersController {
     ReturnMsgServiceImpl returnMsgService;
 
     String securityCode;
+    String token;
 
     @PostMapping("/login")
     @ResponseBody
     public Msg<Boolean> login(@RequestBody Users user) {
-        System.out.println(user);
+        log.info("用户[{}]"+user+"登陆系统。");
         Boolean n = userService.findByName(user.getUserName(),user.getUserPassword());
-        return returnMsgService.returnMsg(n);
+        token = returnMsgService.setToken(user);
+        return returnMsgService.returnMsg(n,token);
     }
 
     @PostMapping("/updatePassword")
     @ResponseBody
     public Msg<Users> updatePassword(@RequestBody Users user) {
         Integer users = userService.updateById(user);
-        return returnMsgService.returnMsg(users);
+        return returnMsgService.returnMsg(users,token);
     }
 
     @PostMapping("/insertUser")
     @ResponseBody
     public Msg<Users> insertUser(@RequestBody Users user) {
         Integer users = userService.insertUser(user);
-        return returnMsgService.returnMsg(users);
+        return returnMsgService.returnMsg(users,token);
     }
 
     @PostMapping("/updataUserPassword")
     @ResponseBody
     public Msg<Users> updataUserPassword(@RequestBody Users user) {
         Integer users = userService.insertUser(user);
-        return returnMsgService.returnMsg(users);
+        return returnMsgService.returnMsg(users,token);
     }
 
 //    @RequestMapping(value = "/securityCode", method = RequestMethod.POST)
