@@ -9,6 +9,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -18,7 +19,7 @@ import java.util.Map;
  * @Date: 2020/12/11 14:55 pm
  * @Version: 1.0.0
  */
-
+@RequestMapping("/user")
 @RestController
 @Slf4j
 @CrossOrigin(origins= { "http://localhost:4200", "null" })
@@ -38,32 +39,35 @@ public class UsersController {
 
     @PostMapping("/login")
     @ResponseBody
-    public Msg<Boolean> login(@RequestBody Users user) {
-        log.info("用户[{}]"+user+"登陆系统。");
+    public Msg<Boolean> login(@RequestBody Users user, HttpServletRequest request) {
+
+        log.info("用户[{}]"+user.getUserName()+"登陆系统。");
         Boolean n = userService.findByName(user.getUserName(),user.getUserPassword());
         token = returnMsgService.setToken(user);
-        return returnMsgService.returnMsg(n,token);
+        Msg msg = returnMsgService.returnMsg(n);
+        msg.setToken(token);
+        return msg;
     }
 
     @PostMapping("/updatePassword")
     @ResponseBody
     public Msg<Users> updatePassword(@RequestBody Users user) {
         Integer users = userService.updateById(user);
-        return returnMsgService.returnMsg(users,token);
+        return returnMsgService.returnMsg(users);
     }
 
     @PostMapping("/insertUser")
     @ResponseBody
     public Msg<Users> insertUser(@RequestBody Users user) {
         Integer users = userService.insertUser(user);
-        return returnMsgService.returnMsg(users,token);
+        return returnMsgService.returnMsg(users);
     }
 
     @PostMapping("/updataUserPassword")
     @ResponseBody
     public Msg<Users> updataUserPassword(@RequestBody Users user) {
         Integer users = userService.insertUser(user);
-        return returnMsgService.returnMsg(users,token);
+        return returnMsgService.returnMsg(users);
     }
 
 //    @RequestMapping(value = "/securityCode", method = RequestMethod.POST)

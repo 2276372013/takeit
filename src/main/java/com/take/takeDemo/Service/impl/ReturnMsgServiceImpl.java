@@ -17,11 +17,11 @@ public class ReturnMsgServiceImpl implements ReturnMsgService {
     Msg<Object> msg;
 
     @Override
-    public Msg returnMsg(Object data,String token) {
+    public Msg returnMsg(Object data) {
         msg.setStatus(200);
         msg.setMsg("success");
+        msg.setError("No have");
         msg.setData(data);
-        msg.setToken(token);
         return msg;
     }
 

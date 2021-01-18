@@ -6,6 +6,6 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface ReturnMsgService<T> {
-    Msg<T> returnMsg(T data,String token);
+    Msg<T> returnMsg(T data);
     String setToken(Users user);
 }
