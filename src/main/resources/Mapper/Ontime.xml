@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.take.takeDemo.Dao.OntimeDao">
+
+
+    <!--@Description: no
+        @Author: whl
+        @Date: 2020/12/11 14:55 pm
+        @Version: 1.0.0-->
+
+    <!--返回集 -->
+    <resultMap id="backMap"
+               type="com.take.takeDemo.Entity.Funtion">
+    </resultMap>
+
+    <!--检索 -->
+    <select id="" resultMap="" parameterType="">
+    </select>
+
+    <!--注册-->
+    <insert id="" parameterType="">
+      </insert>
+
+    <!-- 更新 -->
+    <update id="" parameterType="">
+	</update>
+
+
+
+</mapper>

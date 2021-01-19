@@ -65,7 +65,8 @@ public class DSServiceScanner implements CommandLineRunner {
                 interfaceCode = url.substring(url.lastIndexOf("/") + 1);
                 System.out.println("interfaceCode  ----->  " + interfaceCode);
                 // 获取并拼接interfaceUrl
-//                interfaceUrl = serverHostname + serverContextPath + url;
+                interfaceUrl = serverHostname + serverContextPath + url;
+                System.out.println("interfaceUrl  ----->  " + interfaceUrl);
             }
             // 获取接口名称
             interfaceName = info.getName();
