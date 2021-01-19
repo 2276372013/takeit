@@ -1,6 +1,5 @@
 package com.take.takeDemo.Controller;
 
-import com.take.takeDemo.Common.Util.JWTUtils;
 import com.take.takeDemo.Entity.Msg;
 import com.take.takeDemo.Entity.Users;
 import com.take.takeDemo.Service.UserService;
@@ -10,8 +9,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
-import java.util.HashMap;
-import java.util.Map;
 
 /**
  * @Description: no
@@ -37,7 +34,7 @@ public class UsersController {
     String securityCode;
     String token;
 
-    @PostMapping("/login")
+    @PostMapping(path="/login",name="用户登陆")
     @ResponseBody
     public Msg<Boolean> login(@RequestBody Users user, HttpServletRequest request) {
 
@@ -79,4 +76,11 @@ public class UsersController {
 //        userService.setStatus(1);
 //        return msgEmail;
 //    }
+
+    @GetMapping("/haha")
+    @ResponseBody
+    public Msg<Users> haha(@RequestBody Users user) {
+        Integer users = userService.insertUser(user);
+        return returnMsgService.returnMsg(users);
+    }
 }
