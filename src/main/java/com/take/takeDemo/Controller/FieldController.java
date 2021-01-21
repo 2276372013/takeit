@@ -30,11 +30,11 @@ public class FieldController {
         Integer fields = fieldService.insertField(field);
         return fields;
     }
-
-
+//    @CrossOrigin(origins = {"http://localhost:4200", "null"})
     @PostMapping("/ok")
     @ResponseBody
-    public String ok(@RequestHeader(value = "authorization") String token) {
-        return token;
+    public String ok() {
+//        public String ok(@RequestHeader(value = "token") String token) {
+        return "ok";
     }
 }

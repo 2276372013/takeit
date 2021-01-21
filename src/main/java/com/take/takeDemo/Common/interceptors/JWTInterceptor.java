@@ -26,7 +26,20 @@ public class JWTInterceptor implements HandlerInterceptor {
                              Object handler) throws Exception {
 
 //        response.setHeader("Access-Control-Allow-Origin", "*");
-
+        HttpServletResponse httpResponse = response;
+        httpResponse.setCharacterEncoding("UTF-8");
+        httpResponse.setContentType("application/json; charset=utf-8");
+        httpResponse.setHeader("Access-Control-Allow-Origin","*");
+        httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
+        httpResponse.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE,PATCH,PUT");
+        httpResponse.setHeader("Access-Control-Max-Age", "3600");
+        httpResponse.setHeader("Access-Control-Allow-Headers", "Origin,X-Requested-With,x-requested-with,X-Custom-Header," +
+                "Content-Type,Accept,Authorization");
+        String method = request.getMethod();
+        if ("OPTIONS".equalsIgnoreCase(method)){
+            log.info("OPTIONS请求");
+            httpResponse.setStatus(HttpServletResponse.SC_ACCEPTED);
+        }
         System.out.println("***************************************************************");
         System.out.println("request.getRequestURL():"+request.getRequestURL());
         Enumeration<String> headerNames = request.getHeaderNames();
@@ -40,7 +53,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         System.out.println("***************************************************************");
 
         //获取请求头中的令牌
-        String token = request.getHeader("authorization");
+        String token = request.getHeader("token");
 
         log.info("当前token为：[{}]", token);
 
