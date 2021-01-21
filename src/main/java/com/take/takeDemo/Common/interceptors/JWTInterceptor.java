@@ -7,13 +7,17 @@ import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.take.takeDemo.Common.Util.JWTUtils;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
 @Slf4j
+@Component
 public class JWTInterceptor implements HandlerInterceptor {
 
     @Override
@@ -21,9 +25,24 @@ public class JWTInterceptor implements HandlerInterceptor {
                              HttpServletResponse response,
                              Object handler) throws Exception {
 
+//        response.setHeader("Access-Control-Allow-Origin", "*");
+
+        System.out.println("***************************************************************");
+        System.out.println("request.getRequestURL():"+request.getRequestURL());
+        Enumeration<String> headerNames = request.getHeaderNames();
+                while (headerNames.hasMoreElements()) {
+                         String name = headerNames.nextElement();
+                        //根据名称获取请求头的值
+                        String value = request.getHeader(name);
+                         System.out.println(name+"---"+value);
+                     }
+                //HttpServletRequest httpRequest
+        System.out.println("***************************************************************");
+
         //获取请求头中的令牌
-        String token = request.getHeader("token");
-        log.info("当前token为：{}", token);
+        String token = request.getHeader("authorization");
+
+        log.info("当前token为：[{}]", token);
 
         Map<String, Object> map = new HashMap<>();
         try {

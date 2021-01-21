@@ -1,6 +1,8 @@
 package com.take.takeDemo.Entity;
 
 import lombok.Data;
+import org.springframework.stereotype.Component;
+import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
 import java.util.List;
@@ -13,6 +15,7 @@ import java.util.List;
  */
 
 @Data
+@Component
 public class Pager<T> {
 	
 	//第几页

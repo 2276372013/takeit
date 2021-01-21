@@ -19,7 +19,6 @@ import javax.servlet.http.HttpServletRequest;
 @RequestMapping("/user")
 @RestController
 @Slf4j
-@CrossOrigin(origins= { "http://localhost:4200", "null" })
 public class UsersController {
 
     @Autowired
@@ -38,7 +37,7 @@ public class UsersController {
     @ResponseBody
     public Msg<Boolean> login(@RequestBody Users user, HttpServletRequest request) {
 
-        log.info("用户[{}]"+user.getUserName()+"登陆系统。");
+        log.info("用户：[{}]"+user.getUserName()+"登陆系统。");
         Boolean n = userService.findByName(user.getUserName(),user.getUserPassword());
         token = returnMsgService.setToken(user);
         Msg msg = returnMsgService.returnMsg(n);
@@ -83,4 +82,5 @@ public class UsersController {
         Integer users = userService.insertUser(user);
         return returnMsgService.returnMsg(users);
     }
+
 }

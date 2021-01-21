@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@CrossOrigin
 public class FieldController {
 
     @Autowired
@@ -30,5 +29,12 @@ public class FieldController {
     public int insertArtist(@RequestBody Field field) {
         Integer fields = fieldService.insertField(field);
         return fields;
+    }
+
+
+    @PostMapping("/ok")
+    @ResponseBody
+    public String ok(@RequestHeader(value = "authorization") String token) {
+        return token;
     }
 }

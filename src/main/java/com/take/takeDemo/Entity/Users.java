@@ -1,7 +1,6 @@
 package com.take.takeDemo.Entity;
 
 import lombok.Data;
-
 import java.util.Date;
 
 /**

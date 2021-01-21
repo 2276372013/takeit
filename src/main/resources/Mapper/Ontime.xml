@@ -8,22 +8,22 @@
         @Date: 2020/12/11 14:55 pm
         @Version: 1.0.0-->
 
-    <!--返回集 -->
-    <resultMap id="backMap"
-               type="com.take.takeDemo.Entity.Funtion">
-    </resultMap>
+<!--    &lt;!&ndash;返回集 &ndash;&gt;-->
+<!--    <resultMap id="backMap"-->
+<!--               type="com.take.takeDemo.Entity.Funtion">-->
+<!--    </resultMap>-->
 
-    <!--检索 -->
-    <select id="" resultMap="" parameterType="">
-    </select>
+<!--    &lt;!&ndash;检索 &ndash;&gt;-->
+<!--    <select id="" resultMap="" parameterType="">-->
+<!--    </select>-->
 
-    <!--注册-->
-    <insert id="" parameterType="">
-      </insert>
+<!--    &lt;!&ndash;注册&ndash;&gt;-->
+<!--    <insert id="" parameterType="">-->
+<!--      </insert>-->
 
-    <!-- 更新 -->
-    <update id="" parameterType="">
-	</update>
+<!--    &lt;!&ndash; 更新 &ndash;&gt;-->
+<!--    <update id="" parameterType="">-->
+<!--	</update>-->
 
 
 
