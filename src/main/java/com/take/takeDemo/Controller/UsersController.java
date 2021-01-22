@@ -77,7 +77,6 @@ public class UsersController {
         securityCode = String.format("%04d", new Random().nextInt(9999));
         userService.sendSimpleMailMessge(Email,
                 "验证码",
-                "您正在使用邮箱验证码修改账户密码功能，该验证码仅用于修改密码，请勿泄露给他人使用。"
-                        + "验证码：" + securityCode);
+                "您正在使用邮箱验证码修改账户密码功能，该验证码仅用于修改密码，请勿泄露给他人使用。验证码：" + securityCode);
     }
 }

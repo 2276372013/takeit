@@ -20,7 +20,7 @@
 
     <!--修改用户密码 -->
     <update id="updateUserPassword" parameterType="java.lang.String">
-        update users set userPassword = #{Password} where userName = #{username}
+        update users set userPassword = #{password} where userName = #{username}
     </update>
 
     <!--注册-->
