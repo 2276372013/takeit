@@ -1,7 +1,7 @@
 package com.take.takeDemo.Controller;
 
 import com.take.takeDemo.Entity.Field;
-import com.take.takeDemo.Entity.Msg;
+import com.take.takeDemo.Common.Util.Msg.Msg;
 import com.take.takeDemo.Entity.Users;
 import com.take.takeDemo.Service.FieldService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -29,12 +29,5 @@ public class FieldController {
     public int insertArtist(@RequestBody Field field) {
         Integer fields = fieldService.insertField(field);
         return fields;
-    }
-//    @CrossOrigin(origins = {"http://localhost:4200", "null"})
-    @PostMapping("/ok")
-    @ResponseBody
-    public String ok() {
-//        public String ok(@RequestHeader(value = "token") String token) {
-        return "ok";
     }
 }

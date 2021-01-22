@@ -1,6 +1,6 @@
 package com.take.takeDemo.Controller.ControllerAdvice;
 
-import com.take.takeDemo.Entity.Msg;
+import com.take.takeDemo.Common.Util.Msg.Msg;
 import org.springframework.dao.DuplicateKeyException;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

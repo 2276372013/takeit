@@ -5,14 +5,12 @@ import com.auth0.jwt.exceptions.InvalidClaimException;
 import com.auth0.jwt.exceptions.SignatureVerificationException;
 import com.auth0.jwt.exceptions.TokenExpiredException;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.take.takeDemo.Common.Util.JWTUtils;
+import com.take.takeDemo.Common.Util.JWT.JWTUtils;
 import lombok.extern.slf4j.Slf4j;
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import java.util.Enumeration;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -21,36 +19,21 @@ import java.util.Map;
 public class JWTInterceptor implements HandlerInterceptor {
 
     @Override
-    public boolean preHandle(HttpServletRequest request,
-                             HttpServletResponse response,
-                             Object handler) throws Exception {
+    public boolean preHandle(HttpServletRequest request,HttpServletResponse response,Object handler) throws Exception {
 
-//        response.setHeader("Access-Control-Allow-Origin", "*");
-        HttpServletResponse httpResponse = response;
-        httpResponse.setCharacterEncoding("UTF-8");
-        httpResponse.setContentType("application/json; charset=utf-8");
-        httpResponse.setHeader("Access-Control-Allow-Origin","*");
-        httpResponse.setHeader("Access-Control-Allow-Credentials", "true");
-        httpResponse.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE,PATCH,PUT");
-        httpResponse.setHeader("Access-Control-Max-Age", "3600");
-        httpResponse.setHeader("Access-Control-Allow-Headers", "Origin,X-Requested-With,x-requested-with,X-Custom-Header," +
-                "Content-Type,Accept,Authorization");
+        response.setCharacterEncoding("UTF-8");
+        response.setContentType("application/json; charset=utf-8");
+        response.setHeader("Access-Control-Allow-Origin","*");
+        response.setHeader("Access-Control-Allow-Credentials", "true");
+        response.setHeader("Access-Control-Allow-Methods", "POST,GET,OPTIONS,DELETE,PATCH,PUT");
+//        response.setHeader("Access-Control-Max-Age", "3600");
+        response.setHeader("Access-Control-Allow-Headers", "Origin,X-Requested-With,x-requested-with,X-Custom-Header,Content-Type,Accept,Authorization");
+
         String method = request.getMethod();
         if ("OPTIONS".equalsIgnoreCase(method)){
             log.info("OPTIONS请求");
-            httpResponse.setStatus(HttpServletResponse.SC_ACCEPTED);
+            response.setStatus(HttpServletResponse.SC_ACCEPTED);
         }
-        System.out.println("***************************************************************");
-        System.out.println("request.getRequestURL():"+request.getRequestURL());
-        Enumeration<String> headerNames = request.getHeaderNames();
-                while (headerNames.hasMoreElements()) {
-                         String name = headerNames.nextElement();
-                        //根据名称获取请求头的值
-                        String value = request.getHeader(name);
-                         System.out.println(name+"---"+value);
-                     }
-                //HttpServletRequest httpRequest
-        System.out.println("***************************************************************");
 
         //获取请求头中的令牌
         String token = request.getHeader("token");

@@ -1,4 +1,4 @@
-package com.take.takeDemo.Common.Util;
+package com.take.takeDemo.Common.Util.JWT;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.JWTCreator;

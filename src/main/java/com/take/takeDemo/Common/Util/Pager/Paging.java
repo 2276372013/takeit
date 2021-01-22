@@ -1,12 +1,8 @@
-package com.take.takeDemo.Common.Pager;
+package com.take.takeDemo.Common.Util.Pager;
 
 import java.util.List;
 import org.springframework.stereotype.Component;
 import com.github.pagehelper.PageInfo;
-import com.take.takeDemo.Entity.Pager;
-
-
-import java.util.List;
 
 /**
  * @Description: no

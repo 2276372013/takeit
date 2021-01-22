@@ -14,8 +14,8 @@ import org.springframework.stereotype.Service;
 @Service
 public interface UserService {
     Boolean findByName(String userName,String userPassword);
-    Integer updateById(Users user);
+    Integer updataUser(Users user);
     Integer insertUser (Users user);
-//    public void sendSimpleMailMessge(String to, String subject, String content);
-    public int updateUserPassword(String passWord, String email);
+    void sendSimpleMailMessge(String to, String subject, String content);
+    Integer updateUserPassword(Users user);
 }

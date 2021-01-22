@@ -1,7 +1,7 @@
 package com.take.takeDemo.Service.impl;
 
-import com.take.takeDemo.Common.Util.JWTUtils;
-import com.take.takeDemo.Entity.Msg;
+import com.take.takeDemo.Common.Util.JWT.JWTUtils;
+import com.take.takeDemo.Common.Util.Msg.Msg;
 import com.take.takeDemo.Entity.Users;
 import com.take.takeDemo.Service.ReturnMsgService;
 import org.springframework.beans.factory.annotation.Autowired;

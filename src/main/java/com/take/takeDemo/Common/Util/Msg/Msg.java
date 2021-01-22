@@ -1,4 +1,4 @@
-package com.take.takeDemo.Entity;
+package com.take.takeDemo.Common.Util.Msg;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;

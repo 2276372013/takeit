@@ -18,9 +18,9 @@
         select * from users where username = #{user_name}
     </select>
 
-    <!--修改用户信息 -->
-    <update id="updateById" parameterType="Users">
-        update users set userPassword = #{userPassword} where userId = #{userId}
+    <!--修改用户密码 -->
+    <update id="updateUserPassword" parameterType="java.lang.String">
+        update users set userPassword = #{Password} where userName = #{username}
     </update>
 
     <!--注册-->
@@ -29,7 +29,7 @@
     </insert>
 
     <!-- 更新 -->
-    <update id="updateUserPassword" parameterType="String">
+    <update id="updataUser" parameterType="String">
 		update users set userPassword = #{userPassword}
 		WHERE userEmail = #{email}
 	</update>

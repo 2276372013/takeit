@@ -1,4 +1,4 @@
-package com.take.takeDemo.Common.Util;
+package com.take.takeDemo.Common.Util.MD5;
 
 import org.apache.commons.codec.digest.DigestUtils;
 import org.springframework.stereotype.Component;

@@ -1,9 +1,8 @@
-package com.take.takeDemo.ActionOnTime;
+package com.take.takeDemo.Controller.ActionOnTime;
 
 import com.take.takeDemo.Common.InterfaceDIY.Ontime;
 import com.take.takeDemo.Service.OntimeActionService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.RestController;
 
 @Ontime(value="tomorrow-expire",comment="查看明天到期物品",cron="0 0 8,20 1/1 * ?")
 public class OntimeAction {
