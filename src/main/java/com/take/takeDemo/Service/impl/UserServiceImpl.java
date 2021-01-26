@@ -33,8 +33,7 @@ public class UserServiceImpl implements UserService {
     @Autowired
     private JavaMailSender mailSender;
 
-//    @Autowired
-//    private JavaMailSender mailSender;
+    private static final String SENDER = "2276372013@qq.com";
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
@@ -53,8 +52,6 @@ public class UserServiceImpl implements UserService {
         user.setUserPassword(MD5(user));
         return userDao.insertUser(user);
     }
-
-    private static final String SENDER = "2276372013@qq.com";
 
     @Override
     public void sendSimpleMailMessge(String to, String subject, String content) {

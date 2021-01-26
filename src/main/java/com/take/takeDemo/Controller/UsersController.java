@@ -12,7 +12,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -45,7 +44,7 @@ public class UsersController {
     @ResponseBody
     public Msg<Boolean> login(@RequestBody Users user, HttpServletRequest request) {
 
-        log.info("当前token为：[{}]", user.getUserName(), "登陆系统。");
+        log.info("用户：[{}]登陆系统。", user.getUserName());
         Boolean n = userService.findByName(user.getUserName(), user.getUserPassword());
         this.redisService.setRedisString(user.getUserName()+"token",returnMsgService.setToken(user));
         Msg msg = returnMsgService.returnMsg(n);

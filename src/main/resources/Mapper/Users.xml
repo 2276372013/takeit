@@ -13,7 +13,7 @@
                type="com.take.takeDemo.Entity.Users">
     </resultMap>
 
-    <!--检索 -->
+    <!--登陆检索 -->
     <select id="findByName" resultMap="backMap" parameterType="java.lang.String">
         select * from users where username = #{user_name}
     </select>
@@ -28,12 +28,15 @@
         insert into users (username,userpassword,userEmail,userCall,userSex,userBirth) values (#{userName},#{userPassword},#{userEmail},#{userCall},#{userSex},#{userBirth})
     </insert>
 
-    <!-- 更新 -->
+    <!-- 修改用户信息 -->
     <update id="updataUser" parameterType="String">
 		update users set userPassword = #{userPassword}
 		WHERE userEmail = #{email}
 	</update>
 
-
+    <!--修改前查询 -->
+    <select id="findByName" resultMap="backMap" parameterType="java.lang.String">
+        select * from users where username = #{user_name}
+    </select>
 
 </mapper>
