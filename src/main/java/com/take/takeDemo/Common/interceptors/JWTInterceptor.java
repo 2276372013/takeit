@@ -38,7 +38,7 @@ public class JWTInterceptor implements HandlerInterceptor {
         //获取请求头中的令牌
         String token = request.getHeader("token");
 
-        log.info("当前token为：[{}]", token);
+//        log.info("当前token为：[{}]", token);
 
         Map<String, Object> map = new HashMap<>();
         try {
