@@ -1,5 +1,7 @@
 package com.take.takeDemo.Controller;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.take.takeDemo.Common.Util.JWT.JWTUtils;
 import com.take.takeDemo.Common.Util.Msg.Msg;
 import com.take.takeDemo.Common.Util.VerifyCode.IVerifyCodeGen;
 import com.take.takeDemo.Common.Util.VerifyCode.SimpleCharVerifyCodeGenImpl;
@@ -12,6 +14,8 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import springfox.documentation.service.ApiListing;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -45,18 +49,11 @@ public class UsersController {
     public Msg<Boolean> login(@RequestBody Users user, HttpServletRequest request) {
 
         log.info("用户：[{}]登陆系统。", user.getUserName());
-        Boolean n = userService.findByName(user.getUserName(), user.getUserPassword());
+        Boolean n = userService.findByName(user);
         this.redisService.setRedisString(user.getUserName()+"token",returnMsgService.setToken(user));
         Msg msg = returnMsgService.returnMsg(n);
         msg.setToken(redisService.getRedisString(user.getUserName()+"token").toString());
         return msg;
-    }
-
-    @PostMapping("/updataUser")
-    @ResponseBody
-    public Msg<Users> updatePassword(@RequestBody Users user) {
-        Integer users = userService.updataUser(user);
-        return returnMsgService.returnMsg(users);
     }
 
     @PostMapping("/insertUser")
@@ -74,6 +71,23 @@ public class UsersController {
             return returnMsgService.returnMsg(users);
         }
         return returnMsgService.returnMsg("密码修改失败");
+    }
+
+    @PostMapping("/updataUser")
+    @ResponseBody
+    public Msg<Users> updatePassword(@RequestBody Users user) {
+        Integer users = userService.updataUser(user);
+        return returnMsgService.returnMsg(users);
+    }
+
+
+    @PostMapping("/beforeUpdataUser")
+    @ResponseBody
+    public Msg<Users> updataUser(@RequestHeader(value = "token") String token) {
+        DecodedJWT verify = JWTUtils.verify(token);
+        String name = verify.getClaim("userName").asString();
+        Users user = userService.findByName(name);
+        return returnMsgService.returnMsg(user);
     }
 
     @RequestMapping(value = "/securityCode", method = RequestMethod.POST)

@@ -29,14 +29,29 @@
     </insert>
 
     <!-- 修改用户信息 -->
-    <update id="updataUser" parameterType="String">
-		update users set userPassword = #{userPassword}
-		WHERE userEmail = #{email}
+    <update id="updataUser" parameterType="Users">
+		update users
+        <set>
+            <if test="userPassword!= null">
+                userPassword = #{userPassword}
+            </if>
+            <if test="userEmail!= null">
+                ,userEmail = #{userEmail}
+            </if>
+            <if test="userEmail!= null">
+                ,userEmail = #{userEmail}
+            </if>
+            <if test="userCall!= null">
+                ,userCall = #{userCall}
+            </if>
+            <if test="userSex!= null">
+                ,userSex = #{userSex}
+            </if>
+            <if test="userBirth!= null">
+                ,userBirth = #{userBirth}
+            </if>
+        </set>
+        	where userName = #{userName}
 	</update>
-
-    <!--修改前查询 -->
-    <select id="findByName" resultMap="backMap" parameterType="java.lang.String">
-        select * from users where username = #{user_name}
-    </select>
 
 </mapper>

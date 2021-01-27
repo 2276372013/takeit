@@ -37,13 +37,19 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional(propagation = Propagation.SUPPORTS)
-    public Boolean findByName(String userName, String userPassword) {
-        Users user = userDao.findByName(userName);
-        return DM5(userName,userPassword,user);
+    public Boolean findByName(Users user) {
+        Users users = userDao.findByName(user.getUserName());
+        return DM5(user.getUserName(),user.getUserPassword(),users);
+    }
+
+    @Override
+    public Users findByName(String userName) {
+        return  userDao.findByName(userName);
     }
 
     @Override
     public Integer updataUser(Users user) {
+        user.setUserPassword(MD5(user));
         return userDao.updataUser(user);
     }
 

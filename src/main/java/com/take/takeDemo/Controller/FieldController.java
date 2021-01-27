@@ -30,4 +30,11 @@ public class FieldController {
         Integer fields = fieldService.insertField(field);
         return fields;
     }
+
+    @PostMapping("/ok")
+    @ResponseBody
+    public String ok() {
+        return "ok";
+    }
+
 }

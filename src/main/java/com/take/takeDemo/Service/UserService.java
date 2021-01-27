@@ -13,7 +13,8 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    Boolean findByName(String userName,String userPassword);
+    Boolean findByName(Users user);
+    Users findByName(String userName);
     Integer updataUser(Users user);
     Integer insertUser (Users user);
     void sendSimpleMailMessge(String to, String subject, String content);
