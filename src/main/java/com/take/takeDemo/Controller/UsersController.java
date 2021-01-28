@@ -75,7 +75,9 @@ public class UsersController {
 
     @PostMapping("/updataUser")
     @ResponseBody
-    public Msg<Users> updatePassword(@RequestBody Users user) {
+    public Msg<Users> updatePassword(@RequestHeader(value = "token") String token,@RequestBody Users user) {
+        DecodedJWT verify = JWTUtils.verify(token);
+        user.setUserName(verify.getClaim("userName").asString());
         Integer users = userService.updataUser(user);
         return returnMsgService.returnMsg(users);
     }
