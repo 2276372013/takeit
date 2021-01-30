@@ -1,29 +1,28 @@
 package com.take.takeDemo.Controller;
 
-import com.take.takeDemo.Entity.Artist;
-import com.take.takeDemo.Service.ArtistService;
+import com.take.takeDemo.Entity.Goods;
+import com.take.takeDemo.Service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
 @CrossOrigin
-public class ArtistController {
+public class GoodsController {
 
     @Autowired
-    private ArtistService artistService;
+    private GoodsService goodsService;
 
     @PostMapping("/finallartist")
     @ResponseBody
-    public List<Artist> findAll() {
-        return artistService.findAll();
+    public List<Goods> findAll() {
+        return goodsService.findAll();
     }
 
     @PostMapping("/insertartist")
     @ResponseBody
-    public int insertArtist(@RequestBody Artist artist) {
-        Integer artists = artistService.insertArtist(artist);
+    public int insertArtist(@RequestBody Goods goods) {
+        Integer artists = goodsService.insertArtist(goods);
         return artists;
     }
 }

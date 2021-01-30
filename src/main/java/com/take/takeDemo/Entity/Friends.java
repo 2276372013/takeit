@@ -5,7 +5,7 @@ import org.springframework.stereotype.Component;
 
 @Data
 @Component
-public class Field {
+public class Friends {
     private Integer fieldid;
     private String fieldname;
     private String fieldadress;

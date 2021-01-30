@@ -2,8 +2,6 @@ package com.take.takeDemo.Common.Util.Pager;
 
 import lombok.Data;
 import org.springframework.stereotype.Component;
-import org.springframework.web.bind.annotation.RestController;
-
 import javax.validation.constraints.NotNull;
 import java.util.List;
 

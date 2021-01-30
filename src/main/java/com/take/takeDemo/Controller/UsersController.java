@@ -14,8 +14,6 @@ import io.swagger.annotations.ApiOperation;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-import springfox.documentation.service.ApiListing;
-
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
@@ -47,12 +45,11 @@ public class UsersController {
     @PostMapping(path = "/login", name = "用户登陆")
     @ResponseBody
     public Msg<Boolean> login(@RequestBody Users user, HttpServletRequest request) {
-
-        log.info("用户：[{}]登陆系统。", user.getUserName());
         Boolean n = userService.findByName(user);
         this.redisService.setRedisString(user.getUserName()+"token",returnMsgService.setToken(user));
         Msg msg = returnMsgService.returnMsg(n);
         msg.setToken(redisService.getRedisString(user.getUserName()+"token").toString());
+        log.info("用户：[{}]登陆系统。", user.getUserName());
         return msg;
     }
 

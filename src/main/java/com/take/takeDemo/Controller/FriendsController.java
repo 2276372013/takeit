@@ -1,33 +1,32 @@
 package com.take.takeDemo.Controller;
 
-import com.take.takeDemo.Entity.Field;
+import com.take.takeDemo.Entity.Friends;
 import com.take.takeDemo.Common.Util.Msg.Msg;
 import com.take.takeDemo.Entity.Users;
-import com.take.takeDemo.Service.FieldService;
+import com.take.takeDemo.Service.FriendsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
-
 import java.util.List;
 
 @RestController
-public class FieldController {
+public class FriendsController {
 
     @Autowired
-    private FieldService fieldService;
+    private FriendsService friendsService;
 
     @Autowired
     Msg<Users> msgLogin;
 
     @PostMapping("/finallfield")
     @ResponseBody
-    public List<Field> findAll() {
-        return fieldService.findAll();
+    public List<Friends> findAll() {
+        return friendsService.findAll();
     }
 
     @PostMapping("/insertfield")
     @ResponseBody
-    public int insertArtist(@RequestBody Field field) {
-        Integer fields = fieldService.insertField(field);
+    public int insertArtist(@RequestBody Friends friends) {
+        Integer fields = friendsService.insertField(friends);
         return fields;
     }
 
