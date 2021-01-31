@@ -8,5 +8,5 @@ import java.util.List;
 @Service
 public interface GoodsService {
     List<Goods> findAll();
-    Integer insertArtist(Goods goods);
+    Integer insertGoods(Goods goods);
 }

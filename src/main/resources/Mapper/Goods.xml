@@ -12,9 +12,10 @@
         select * from goods
     </select>
 
-    <!--注册-->
-    <insert id="insertArtist" parameterType="Goods">
-        insert into goods values (#{artistname},#{artistinformation},#{Careerexperience},#{Honorrecord},#{actingexperience})
+    <!--添加物品-->
+    <insert id="insertGoods" parameterType="Goods">
+        insert into goods (goodsName,userId,goodsPlace,goodsPublic,goodsCode,saveTimes,placeTime,takeTime,goodsType,frequency,goodsPhoto,goodsDescribe)
+        values (#{goodsName},#{userId},#{goodsPlace},#{goodsPublic},#{goodsCode},#{saveTimes},#{placeTime},#{takeTime},#{goodsType},#{frequency},#{goodsPhoto},#{goodsDescribe})
     </insert>
 
 </mapper>

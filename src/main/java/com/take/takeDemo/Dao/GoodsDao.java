@@ -10,5 +10,5 @@ import java.util.List;
 @Repository
 public interface GoodsDao {
     List<Goods>  findAll();
-    Integer insertArtist(Goods goods);
+    Integer insertGoods(Goods goods);
 }
