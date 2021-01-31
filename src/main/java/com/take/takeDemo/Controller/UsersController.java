@@ -44,10 +44,10 @@ public class UsersController {
 
     @PostMapping(path = "/login", name = "用户登陆")
     @ResponseBody
-    public Msg<Boolean> login(@RequestBody Users user, HttpServletRequest request) {
-        Boolean n = userService.findByName(user);
-        this.redisService.setRedisString(user.getUserName()+"token",returnMsgService.setToken(user));
-        Msg msg = returnMsgService.returnMsg(n);
+    public Msg<Boolean> login(@RequestBody Users user) {
+        Users users = userService.findByName(user);
+        this.redisService.setRedisString(user.getUserName()+"token",returnMsgService.setToken(users));
+        Msg msg = returnMsgService.returnMsg(users);
         msg.setToken(redisService.getRedisString(user.getUserName()+"token").toString());
         log.info("用户：[{}]登陆系统。", user.getUserName());
         return msg;

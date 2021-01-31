@@ -7,6 +7,6 @@ import java.util.List;
 
 @Service
 public interface GoodsService {
-    List<Goods> findAll();
+    List<Goods> findAll(String userId );
     Integer insertGoods(Goods goods);
 }

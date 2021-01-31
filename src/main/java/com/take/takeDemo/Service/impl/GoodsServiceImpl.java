@@ -19,8 +19,8 @@ public class GoodsServiceImpl implements GoodsService {
     private MD5Util md5Util;
 
     @Override
-    public List<Goods> findAll() {
-        return goodsDao.findAll();
+    public List<Goods> findAll(String userId ) {
+        return goodsDao.findAll(userId);
     }
 
     @Override

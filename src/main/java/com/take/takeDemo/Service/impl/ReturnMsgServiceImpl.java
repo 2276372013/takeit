@@ -29,6 +29,7 @@ public class ReturnMsgServiceImpl implements ReturnMsgService {
     public String setToken(Users user) {
         Map<String,String> payload = new HashMap<>();
         payload.put("userName",user.getUserName());
+        payload.put("userId",user.getUserId().toString());
         String token = JWTUtils.getToken(payload);
         return token;
     }

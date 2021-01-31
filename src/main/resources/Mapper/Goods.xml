@@ -8,8 +8,11 @@
     </resultMap>
 
     <!--检索 -->
-    <select id="findAll" resultMap="backMap">
-        select * from goods
+    <select id="findAll" resultMap="backMap" parameterType="java.lang.String">
+        SELECT goods.goodsId,goods.goodsName,goods.userId,goods.goodsPlace,goods.takeTime,goods.frequency,goods.goodsType,goods.goodsPhoto,goods.goodsCode,goods.saveTimes,goods.placeTime,goodstype.typeName,goods.goodsDescribe,
+        CASE goods.goodsPublic WHEN '1' THEN '公开' WHEN '0' THEN '私密' END AS goodsPublic
+        FROM goods,goodstype
+        where goodstype.typeid = goodsType and goods.userId = #{userId};
     </select>
 
     <!--添加物品-->
@@ -17,5 +20,6 @@
         insert into goods (goodsName,userId,goodsPlace,goodsPublic,goodsCode,saveTimes,placeTime,takeTime,goodsType,frequency,goodsPhoto,goodsDescribe)
         values (#{goodsName},#{userId},#{goodsPlace},#{goodsPublic},#{goodsCode},#{saveTimes},#{placeTime},#{takeTime},#{goodsType},#{frequency},#{goodsPhoto},#{goodsDescribe})
     </insert>
+
 
 </mapper>

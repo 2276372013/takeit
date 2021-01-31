@@ -9,6 +9,6 @@ import java.util.List;
 @Mapper
 @Repository
 public interface GoodsDao {
-    List<Goods>  findAll();
+    List<Goods>  findAll(String userId );
     Integer insertGoods(Goods goods);
 }

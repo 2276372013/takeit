@@ -13,7 +13,7 @@ import org.springframework.stereotype.Service;
 
 @Service
 public interface UserService {
-    Boolean findByName(Users user);
+    Users findByName(Users user);
     Users findByName(String userName);
     Integer updataUser(Users user);
     Integer insertUser (Users user);
