@@ -45,19 +45,19 @@ public class JWTInterceptor implements HandlerInterceptor {
             JWTUtils.verify(token);//验证令牌
             return true;//放行请求
         } catch (SignatureVerificationException e) {
-            e.printStackTrace();
+            log.error("签名不一致");
             map.put("msg", "签名不一致");
         } catch (TokenExpiredException e) {
-            e.printStackTrace();
+            log.error("令牌过期");
             map.put("msg", "令牌过期");
         } catch (AlgorithmMismatchException e) {
-            e.printStackTrace();
+            log.error("算法不匹配");
             map.put("msg", "算法不匹配");
         } catch (InvalidClaimException e) {
-            e.printStackTrace();
+            log.error("失效的payload");
             map.put("msg", "失效的payload");
         } catch (Exception e) {
-            e.printStackTrace();
+            log.error("token无效");
             map.put("msg", "token无效");
         }
 

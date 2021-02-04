@@ -35,5 +35,9 @@ public class GoodsController {
         return returnMsgService.returnMsg(artists);
     }
 
-
+    @RequestMapping(value = "/okToken", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg okToken() {
+        return returnMsgService.returnMsg("ok");
+    }
 }
