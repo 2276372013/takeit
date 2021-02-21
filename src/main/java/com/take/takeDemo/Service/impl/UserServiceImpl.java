@@ -58,6 +58,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer insertUser(Users user) {
+        System.out.println(user.getUserBirth());
         user.setUserPassword(MD5(user));
         return userDao.insertUser(user);
     }

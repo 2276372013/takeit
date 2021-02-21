@@ -19,15 +19,33 @@ public class GoodsServiceImpl implements GoodsService {
     private MD5Util md5Util;
 
     @Override
-    public List<Goods> findAll(String userId ) {
+    public List<Goods> findAll(String userId) {
         return goodsDao.findAll(userId);
+    }
+
+    @Override
+    public List<String> findAllGoodsPlace(String userId) {
+        return goodsDao.findAllGoodsPlace(userId);
+    }
+
+    @Override
+    public List<String> findAllGoodsType(String userId) {
+        return goodsDao.findAllGoodsType(userId);
     }
 
     @Override
     public Integer insertGoods(Goods goods) {
         //生成物品代码
         goods.setGoodsCode(MD5(goods));
+        if(goods.getGoodsPublic().equals(true)){
+            goods.setGoodsPublic("1");
+        }else{
+            goods.setGoodsPublic("0");
+        }
+        System.out.println(goods.getSaveTimes());
+        System.out.println(goods.getPlaceTime());
         return goodsDao.insertGoods(goods);
+//        return null;
     }
 
     public String MD5(Goods goods){

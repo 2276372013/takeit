@@ -30,14 +30,42 @@ public class GoodsController {
 
     @PostMapping("/insertGoods")
     @ResponseBody
-    public Msg insertArtist(@RequestBody Goods goods) {
+    public Msg insertArtist(@RequestBody Goods goods,@RequestHeader(value = "token") String token) {
+        DecodedJWT verify = JWTUtils.verify(token);
+        String userId = verify.getClaim("userId").asString();
+        goods.setUserId(userId);
         Integer artists = goodsService.insertGoods(goods);
         return returnMsgService.returnMsg(artists);
     }
 
+
+    @RequestMapping(value = "/findallgoodstype", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg findallgoodstype(@RequestHeader(value = "token") String token) {
+        DecodedJWT verify = JWTUtils.verify(token);
+        String userId = verify.getClaim("userId").asString();
+        System.out.println(userId);
+        List<String> goodstype = goodsService.findAllGoodsType(userId);
+        return returnMsgService.returnMsg(goodstype);
+    }
+
+    @RequestMapping(value = "/findallgoodsplace", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg findallgoodsplace(@RequestHeader(value = "token") String token) {
+        DecodedJWT verify = JWTUtils.verify(token);
+        String userId = verify.getClaim("userId").asString();
+        System.out.println(userId);
+        List<String> goodsplace = goodsService.findAllGoodsPlace(userId);
+        return returnMsgService.returnMsg(goodsplace);
+    }
+
+    //测试用请求
     @RequestMapping(value = "/okToken", method = RequestMethod.POST)
     @ResponseBody
     public Msg okToken() {
         return returnMsgService.returnMsg("ok");
     }
+
+
+
 }

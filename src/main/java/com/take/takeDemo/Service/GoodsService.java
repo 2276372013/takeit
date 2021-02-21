@@ -9,4 +9,6 @@ import java.util.List;
 public interface GoodsService {
     List<Goods> findAll(String userId );
     Integer insertGoods(Goods goods);
+    List<String> findAllGoodsPlace(String userId );
+    List<String> findAllGoodsType(String userId );
 }

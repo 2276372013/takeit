@@ -16,10 +16,23 @@
     </select>
 
     <!--添加物品-->
-    <insert id="insertGoods" parameterType="Goods">
-        insert into goods (goodsName,userId,goodsPlace,goodsPublic,goodsCode,saveTimes,placeTime,takeTime,goodsType,frequency,goodsPhoto,goodsDescribe)
-        values (#{goodsName},#{userId},#{goodsPlace},#{goodsPublic},#{goodsCode},#{saveTimes},#{placeTime},#{takeTime},#{goodsType},#{frequency},#{goodsPhoto},#{goodsDescribe})
+    <insert id="insertGoods" parameterType="Goods" >
+        insert into goods (goodsName,userId,goodsPlace,goodsPublic,goodsCode,saveTimes,placeTime,goodsType,goodsPhoto,goodsDescribe)
+        values (#{goodsName},#{userId},#{goodsPlace},#{goodsPublic},#{goodsCode},#{saveTimes},#{placeTime},#{goodsType},#{goodsPhoto},#{goodsDescribe})
     </insert>
+
+    <!--检索物品位置 -->
+    <select id="findAllGoodsPlace" parameterType="java.lang.String" resultType="String">
+        SELECT placeName
+        FROM `goodsplace`
+        where userId = #{userId};
+    </select>
+    <!--检索物品种类 -->
+    <select id="findAllGoodsType" parameterType="java.lang.String" resultType="String">
+        select typeName
+        FROM `goodstype`
+        where userId = #{userId};
+    </select>
 
 
 </mapper>
