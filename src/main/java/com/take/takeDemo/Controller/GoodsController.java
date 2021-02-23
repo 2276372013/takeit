@@ -30,7 +30,7 @@ public class GoodsController {
 
     @PostMapping("/insertGoods")
     @ResponseBody
-    public Msg insertArtist(@RequestBody Goods goods,@RequestHeader(value = "token") String token) {
+    public Msg insertGoods(@RequestBody Goods goods,@RequestHeader(value = "token") String token) {
         DecodedJWT verify = JWTUtils.verify(token);
         String userId = verify.getClaim("userId").asString();
         goods.setUserId(userId);
@@ -54,9 +54,15 @@ public class GoodsController {
     public Msg findallgoodsplace(@RequestHeader(value = "token") String token) {
         DecodedJWT verify = JWTUtils.verify(token);
         String userId = verify.getClaim("userId").asString();
-        System.out.println(userId);
         List<String> goodsplace = goodsService.findAllGoodsPlace(userId);
         return returnMsgService.returnMsg(goodsplace);
+    }
+
+    @RequestMapping(value = "/deleteGoods", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg deleteGoods(@RequestBody String[] goodsIdList) {
+        int deleteGoods = goodsService.deleteGoods(goodsIdList);
+        return returnMsgService.returnMsg(deleteGoods);
     }
 
     //测试用请求

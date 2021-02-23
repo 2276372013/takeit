@@ -33,6 +33,35 @@
         FROM `goodstype`
         where userId = #{userId};
     </select>
+    <!--批量删除deleteGoods传数组-->
+    <delete id="deleteGoods" parameterType="java.lang.String">
+        delete from goods
+        where goodsId IN
+        <foreach collection="array" item="goodsId" open="(" separator="," close=")">
+            #{goodsId}
+        </foreach>
+    </delete>
 
-
+    <!--检索物品位置 -->
+    <select id="findGoodsPlace" resultType="Integer" parameterType="java.lang.String">
+        SELECT COUNT(1)
+        FROM goodsplace
+        where placeName = #{placeName} and userId = #{userId};
+    </select>
+    <!--检索物品种类 -->
+    <select id="findGoodsType" resultType="Integer" parameterType="java.lang.String" >
+        SELECT COUNT(1)
+        FROM goodstype
+        where typeName = #{typeName} and userId = #{userId};
+    </select>
+    <!--添加物品位置-->
+    <insert id="insertGoodsPlace" parameterType="java.lang.String"  useGeneratedKeys="true" keyProperty="id">
+        insert into goodsPlace (userId,goodsPlace)
+        values (#{userId},#{goodsPlace})
+    </insert>
+    <!--添加物品种类-->
+    <insert id="insertGoodsType" parameterType="java.lang.String"  useGeneratedKeys="true" keyProperty="id">
+        insert into goodsType (userId,goodsType)
+        values (#{userId},#{goodsType})
+    </insert>
 </mapper>

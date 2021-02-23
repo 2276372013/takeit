@@ -34,6 +34,31 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public Integer deleteGoods(String[] goodsIdList) {
+        return goodsDao.deleteGoods(goodsIdList);
+    }
+
+    @Override
+    public Integer findGoodsPlace(String userId, String placeName) {
+        return goodsDao.findGoodsPlace(userId,placeName);
+    }
+
+    @Override
+    public Integer findGoodsType(String userId, String typeName) {
+        return goodsDao.findGoodsType(userId,typeName);
+    }
+
+    @Override
+    public Integer insertGoodsPlace(String userId, String goodsPlace) {
+        return goodsDao.insertGoodsPlace(userId,goodsPlace);
+    }
+
+    @Override
+    public Integer insertGoodsType(String userId, String goodsType) {
+        return goodsDao.insertGoodsType(userId,goodsType);
+    }
+
+    @Override
     public Integer insertGoods(Goods goods) {
         //生成物品代码
         goods.setGoodsCode(MD5(goods));
@@ -42,10 +67,7 @@ public class GoodsServiceImpl implements GoodsService {
         }else{
             goods.setGoodsPublic("0");
         }
-        System.out.println(goods.getSaveTimes());
-        System.out.println(goods.getPlaceTime());
         return goodsDao.insertGoods(goods);
-//        return null;
     }
 
     public String MD5(Goods goods){
