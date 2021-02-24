@@ -33,10 +33,17 @@ public class GoodsControllerAspect {
 		ObjectMapper objectMapper = new ObjectMapper();
 		Goods goods = objectMapper.convertValue(joinPoint.getArgs()[0], Goods.class);
 		String typeName = goods.getTypeName();
-		String goodsPlace = goods.getGoodsPlace();
+		String placeName = goods.getGoodsPlace();
 
 		DecodedJWT verify = JWTUtils.verify(joinPoint.getArgs()[1].toString());
 		String userId = verify.getClaim("userId").asString();
+
+		if(goodsService.findGoodsPlace(userId,placeName) != 1){
+			goodsService.insertGoodsPlace(userId,placeName);
+		}
+		if(goodsService.findGoodsType(userId,typeName) != 1){
+			goodsService.insertGoodsType(userId,typeName);
+		}
 
 		log.info("携带数据（token）ARGS : " + Arrays.toString(joinPoint.getArgs()));
 	}

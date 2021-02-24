@@ -14,6 +14,6 @@ public interface GoodsService {
     Integer deleteGoods(String[] goodsIdList);
     Integer findGoodsPlace(String userId,String placeName);
     Integer findGoodsType(String userId,String typeName);
-    Integer insertGoodsPlace(String userId,String goodsPlace);
-    Integer insertGoodsType(String userId,String goodsType);
+    Integer insertGoodsPlace(String userId,String placeName);
+    Integer insertGoodsType(String userId,String typeName);
 }

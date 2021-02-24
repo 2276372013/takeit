@@ -56,12 +56,12 @@
     </select>
     <!--添加物品位置-->
     <insert id="insertGoodsPlace" parameterType="java.lang.String"  useGeneratedKeys="true" keyProperty="id">
-        insert into goodsPlace (userId,goodsPlace)
-        values (#{userId},#{goodsPlace})
+        insert into goodsPlace (userId,placeName)
+        values (#{userId},#{placeName})
     </insert>
     <!--添加物品种类-->
     <insert id="insertGoodsType" parameterType="java.lang.String"  useGeneratedKeys="true" keyProperty="id">
-        insert into goodsType (userId,goodsType)
-        values (#{userId},#{goodsType})
+        insert into goodsType (userId,typeName)
+        values (#{userId},#{typeName})
     </insert>
 </mapper>
