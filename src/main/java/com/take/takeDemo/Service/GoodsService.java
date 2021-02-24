@@ -16,4 +16,5 @@ public interface GoodsService {
     Integer findGoodsType(String userId,String typeName);
     Integer insertGoodsPlace(String userId,String placeName);
     Integer insertGoodsType(String userId,String typeName);
+    List<Goods>  selectLikeGoods(Goods goods);
 }

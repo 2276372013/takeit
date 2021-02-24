@@ -13,11 +13,9 @@ public interface GoodsDao {
     List<String> findAllGoodsPlace(String userId);
     List<String> findAllGoodsType(String userId);
     Integer deleteGoods(String[] goodsIdList);
-
     Integer findGoodsPlace(String userId,String placeName);
     Integer findGoodsType(String userId,String typeName);
     Integer insertGoodsPlace(String userId,String placeName);
     Integer insertGoodsType(String userId,String typeName);
-//    Integer insertGoodsPlace(String placeId,String userId,String placeName);
-//    Integer insertGoodsType(String typeid,String userId,String typeName);
+    List<Goods> selectLikeGoods(Goods goods);
 }

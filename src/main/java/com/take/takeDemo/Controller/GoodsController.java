@@ -65,6 +65,15 @@ public class GoodsController {
         return returnMsgService.returnMsg(deleteGoods);
     }
 
+    @RequestMapping(value = "/selectLikeGoods", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg selectLikeGoods(@RequestBody Goods goods,@RequestHeader(value = "token") String token) {
+        DecodedJWT verify = JWTUtils.verify(token);
+        String userId = verify.getClaim("userId").asString();
+        goods.setUserId(userId);
+        return returnMsgService.returnMsg(goodsService.selectLikeGoods(goods));
+    }
+
     //测试用请求
     @RequestMapping(value = "/okToken", method = RequestMethod.POST)
     @ResponseBody

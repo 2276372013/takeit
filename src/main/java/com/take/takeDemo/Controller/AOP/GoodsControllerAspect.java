@@ -32,8 +32,10 @@ public class GoodsControllerAspect {
 		// 接收到请求，记录请求内容
 		ObjectMapper objectMapper = new ObjectMapper();
 		Goods goods = objectMapper.convertValue(joinPoint.getArgs()[0], Goods.class);
-		String typeName = goods.getTypeName();
+		String typeName = goods.getGoodsType();
 		String placeName = goods.getGoodsPlace();
+
+
 
 		DecodedJWT verify = JWTUtils.verify(joinPoint.getArgs()[1].toString());
 		String userId = verify.getClaim("userId").asString();

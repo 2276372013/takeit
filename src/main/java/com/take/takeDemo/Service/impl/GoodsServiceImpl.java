@@ -59,6 +59,11 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
+    public List<Goods> selectLikeGoods(Goods goods) {
+        return goodsDao.selectLikeGoods(goods);
+    }
+
+    @Override
     public Integer insertGoods(Goods goods) {
         //生成物品代码
         goods.setGoodsCode(MD5(goods));

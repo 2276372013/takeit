@@ -21,5 +21,4 @@ public class Goods {
     private String frequency;//'操作频率'
     private String goodsPhoto;//'物品照片
     private String goodsDescribe;//'物品描述'
-    private String typeName;//标签描述
 }
