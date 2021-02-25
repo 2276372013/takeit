@@ -4,6 +4,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.take.takeDemo.Common.Util.JWT.JWTUtils;
 import com.take.takeDemo.Entity.Goods;
+import com.take.takeDemo.Entity.GoodsPlace;
+import com.take.takeDemo.Entity.GoodsType;
 import com.take.takeDemo.Service.GoodsService;
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.annotation.*;
@@ -32,21 +34,7 @@ public class GoodsControllerAspect {
 		// 接收到请求，记录请求内容
 		ObjectMapper objectMapper = new ObjectMapper();
 		Goods goods = objectMapper.convertValue(joinPoint.getArgs()[0], Goods.class);
-		String typeName = goods.getGoodsType();
-		String placeName = goods.getGoodsPlace();
-
-
-
-		DecodedJWT verify = JWTUtils.verify(joinPoint.getArgs()[1].toString());
-		String userId = verify.getClaim("userId").asString();
-
-		if(goodsService.findGoodsPlace(userId,placeName) != 1){
-			goodsService.insertGoodsPlace(userId,placeName);
-		}
-		if(goodsService.findGoodsType(userId,typeName) != 1){
-			goodsService.insertGoodsType(userId,typeName);
-		}
-
+//		System.out.println(goods);
 		log.info("携带数据（token）ARGS : " + Arrays.toString(joinPoint.getArgs()));
 	}
 

@@ -1,7 +1,10 @@
 package com.take.takeDemo.Dao;
 
 import com.take.takeDemo.Entity.Goods;
+import com.take.takeDemo.Entity.GoodsPlace;
+import com.take.takeDemo.Entity.GoodsType;
 import org.apache.ibatis.annotations.Mapper;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 import java.util.List;
 
@@ -13,9 +16,9 @@ public interface GoodsDao {
     List<String> findAllGoodsPlace(String userId);
     List<String> findAllGoodsType(String userId);
     Integer deleteGoods(String[] goodsIdList);
-    Integer findGoodsPlace(String userId,String placeName);
-    Integer findGoodsType(String userId,String typeName);
-    Integer insertGoodsPlace(String userId,String placeName);
-    Integer insertGoodsType(String userId,String typeName);
-    List<Goods> selectLikeGoods(Goods goods);
+    Integer findGoodsPlace(GoodsPlace goodsPlace );
+    Integer findGoodsType(GoodsType goodsType);
+    Integer insertGoodsPlace(GoodsPlace goodsPlace );
+    Integer insertGoodsType(GoodsType goodsType);
+    List<Goods> selectLikeGoods(@Param("good") Goods good);
 }

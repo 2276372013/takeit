@@ -1,6 +1,8 @@
 package com.take.takeDemo.Service;
 
 import com.take.takeDemo.Entity.Goods;
+import com.take.takeDemo.Entity.GoodsPlace;
+import com.take.takeDemo.Entity.GoodsType;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -12,9 +14,9 @@ public interface GoodsService {
     List<String> findAllGoodsPlace(String userId );
     List<String> findAllGoodsType(String userId );
     Integer deleteGoods(String[] goodsIdList);
-    Integer findGoodsPlace(String userId,String placeName);
-    Integer findGoodsType(String userId,String typeName);
-    Integer insertGoodsPlace(String userId,String placeName);
-    Integer insertGoodsType(String userId,String typeName);
+    Integer findGoodsPlace(GoodsPlace goodsPlace);
+    Integer findGoodsType(GoodsType goodsType);
+    Integer insertGoodsPlace(GoodsPlace goodsPlace);
+    Integer insertGoodsType(GoodsType goodsType);
     List<Goods>  selectLikeGoods(Goods goods);
 }

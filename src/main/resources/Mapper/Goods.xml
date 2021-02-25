@@ -43,57 +43,58 @@
     </delete>
 
     <!--检索物品位置 -->
-    <select id="findGoodsPlace" resultType="Integer" parameterType="java.lang.String">
-        SELECT COUNT(1)
+    <select id="findGoodsPlace" resultType="Integer" parameterType="com.take.takeDemo.Entity.GoodsPlace">
+        SELECT placeId
         FROM goodsplace
         where placeName = #{placeName} and userId = #{userId};
     </select>
     <!--检索物品种类 -->
-    <select id="findGoodsType" resultType="Integer" parameterType="java.lang.String" >
-        SELECT COUNT(1)
+    <select id="findGoodsType" resultType="Integer" parameterType="com.take.takeDemo.Entity.GoodsType" >
+        SELECT typeid
         FROM goodstype
         where typeName = #{typeName} and userId = #{userId};
     </select>
     <!--添加物品位置-->
-    <insert id="insertGoodsPlace" parameterType="java.lang.String">
+    <insert id="insertGoodsPlace" parameterType="com.take.takeDemo.Entity.GoodsPlace" useGeneratedKeys="true" keyProperty="placeId">
         insert into goodsPlace (userId,placeName)
         values (#{userId},#{placeName})
     </insert>
     <!--添加物品种类-->
-    <insert id="insertGoodsType" parameterType="java.lang.String">
+    <insert id="insertGoodsType" parameterType="com.take.takeDemo.Entity.GoodsType" useGeneratedKeys="true" keyProperty="typeid">
         insert into goodsType (userId,typeName)
         values (#{userId},#{typeName})
     </insert>
 
     <!--模糊检索 -->
-    <select id="selectLikeGoods" resultMap="backMap" parameterType="Goods">
+    <select id="selectLikeGoods" resultMap="backMap" parameterType="com.take.takeDemo.Entity.Goods">
         SELECT goods.goodsId,goods.goodsName,goods.userId,goods.goodsPlace,goods.takeTime,goods.frequency,goods.goodsType,goods.goodsPhoto,goods.goodsCode,goods.saveTimes,goods.placeTime,goodstype.typeName,goods.goodsDescribe,
         CASE goods.goodsPublic WHEN '1' THEN '公开' WHEN '0' THEN '私密' END AS goodsPublic
         FROM goods,goodstype
         <where>
-            goods.userId = #{userId}
-            <if test="goods.goodsName != null">
-                AND goods.goodsName LIKE "%"#{goods.goodsName}"%"
+            goods.userId = #{good.userId} and goodstype.typeid = goodsType
+            <if test="good.goodsName != null">
+                AND goods.goodsName LIKE "%"#{good.goodsName}"%"
             </if>
-            <if test="goods.goodsPlace != null">
-                AND goods.goodsPlace LIKE "%"#{goods.goodsPlace}"%"
+            <if test="good.goodsPlace != null">
+                AND goods.goodsPlace LIKE "%"#{good.goodsPlace}"%"
             </if>
-            <if test="goods.takeTime != null">
-                AND goods.takeTime LIKE "%"#{goods.takeTime}"%"
+            <if test="good.takeTime != null">
+                AND goods.takeTime LIKE "%"#{good.takeTime}"%"
             </if>
-            <if test="goods.saveTimes != null">
-                AND goods.saveTimes LIKE "%"#{goods.saveTimes}"%"
+            <if test="good.saveTimes != null">
+                AND goods.saveTimes LIKE "%"#{good.saveTimes}"%"
             </if>
-            <if test="goods.goodsPublic != null">
-                AND goods.goodsPublic LIKE "%"#{goods.goodsPublic}"%"
+            <if test="good.goodsPublic != null">
+                AND goods.goodsPublic LIKE "%"#{good.goodsPublic}"%"
             </if>
-            <if test="goods.goodsType != null">
-                AND goods.goodsType LIKE "%"#{goods.goodsType}"%"
+            <if test="good.goodsType != null">
+                AND goods.goodsType LIKE "%"#{good.goodsType}"%"
             </if>
-            <if test="goods.goodsCode != null">
-                AND goods.goodsCode LIKE "%"#{goods.goodsCode}"%"
+            <if test="good.goodsCode != null">
+                AND goods.goodsCode LIKE "%"#{good.goodsCode}"%"
             </if>
         </where>
     </select>
+<!--    useGeneratedKeys="true" keyProperty="payRecordId"-->
 
 </mapper>

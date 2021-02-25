@@ -3,6 +3,8 @@ package com.take.takeDemo.Service.impl;
 import com.take.takeDemo.Common.Util.MD5.MD5Util;
 import com.take.takeDemo.Dao.GoodsDao;
 import com.take.takeDemo.Entity.Goods;
+import com.take.takeDemo.Entity.GoodsPlace;
+import com.take.takeDemo.Entity.GoodsType;
 import com.take.takeDemo.Entity.Users;
 import com.take.takeDemo.Service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -39,23 +41,23 @@ public class GoodsServiceImpl implements GoodsService {
     }
 
     @Override
-    public Integer findGoodsPlace(String userId, String placeName) {
-        return goodsDao.findGoodsPlace(userId,placeName);
+    public Integer findGoodsPlace(GoodsPlace goodsPlace ) {
+        return goodsDao.findGoodsPlace(goodsPlace);
     }
 
     @Override
-    public Integer findGoodsType(String userId, String typeName) {
-        return goodsDao.findGoodsType(userId,typeName);
+    public Integer findGoodsType(GoodsType goodsType) {
+        return goodsDao.findGoodsType(goodsType);
     }
 
     @Override
-    public Integer insertGoodsPlace(String userId, String goodsPlace) {
-        return goodsDao.insertGoodsPlace(userId,goodsPlace);
+    public Integer insertGoodsPlace(GoodsPlace goodsPlace) {
+        return goodsDao.insertGoodsPlace(goodsPlace);
     }
 
     @Override
-    public Integer insertGoodsType(String userId, String goodsType) {
-        return goodsDao.insertGoodsType(userId,goodsType);
+    public Integer insertGoodsType(GoodsType goodsType) {
+        return goodsDao.insertGoodsType(goodsType);
     }
 
     @Override

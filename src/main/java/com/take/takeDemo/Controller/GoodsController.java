@@ -4,6 +4,8 @@ import com.auth0.jwt.interfaces.DecodedJWT;
 import com.take.takeDemo.Common.Util.JWT.JWTUtils;
 import com.take.takeDemo.Common.Util.Msg.Msg;
 import com.take.takeDemo.Entity.Goods;
+import com.take.takeDemo.Entity.GoodsPlace;
+import com.take.takeDemo.Entity.GoodsType;
 import com.take.takeDemo.Service.GoodsService;
 import com.take.takeDemo.Service.impl.ReturnMsgServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +36,25 @@ public class GoodsController {
         DecodedJWT verify = JWTUtils.verify(token);
         String userId = verify.getClaim("userId").asString();
         goods.setUserId(userId);
+
+        GoodsPlace goodsPlace = new GoodsPlace();
+        goodsPlace.setPlaceName(goods.getGoodsType());
+        goodsPlace.setUserId(userId);
+        GoodsType goodsType = new GoodsType();
+        goodsType.setTypeName(goods.getGoodsPlace());
+        goodsType.setUserId(userId);
+
+        if(goodsService.findGoodsPlace(goodsPlace).equals(null)){
+            goods.setGoodsPlace(goodsService.insertGoodsPlace(goodsPlace).toString());
+        }else{
+            goods.setGoodsPlace(goodsService.insertGoodsPlace(goodsPlace).toString());
+        }
+        if(goodsService.findGoodsType(goodsType).equals(null)){
+            goods.setGoodsType(goodsService.findGoodsPlace(goodsPlace).toString());
+        }else{
+            goods.setGoodsType(goodsService.findGoodsType(goodsType).toString());
+        }
+
         Integer artists = goodsService.insertGoods(goods);
         return returnMsgService.returnMsg(artists);
     }
