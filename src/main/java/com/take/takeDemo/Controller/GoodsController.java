@@ -38,19 +38,21 @@ public class GoodsController {
         goods.setUserId(userId);
 
         GoodsPlace goodsPlace = new GoodsPlace();
-        goodsPlace.setPlaceName(goods.getGoodsType());
+        goodsPlace.setPlaceName(goods.getGoodsPlace());
         goodsPlace.setUserId(userId);
         GoodsType goodsType = new GoodsType();
-        goodsType.setTypeName(goods.getGoodsPlace());
+        goodsType.setTypeName(goods.getGoodsType());
         goodsType.setUserId(userId);
 
-        if(goodsService.findGoodsPlace(goodsPlace).equals(null)){
-            goods.setGoodsPlace(goodsService.insertGoodsPlace(goodsPlace).toString());
+        if(goodsService.findGoodsPlace(goodsPlace)==null){
+            goodsService.insertGoodsPlace(goodsPlace);
+            goods.setGoodsPlace(goodsService.findGoodsPlace(goodsPlace).toString());
         }else{
-            goods.setGoodsPlace(goodsService.insertGoodsPlace(goodsPlace).toString());
+            goods.setGoodsPlace(goodsService.findGoodsPlace(goodsPlace).toString());
         }
-        if(goodsService.findGoodsType(goodsType).equals(null)){
-            goods.setGoodsType(goodsService.findGoodsPlace(goodsPlace).toString());
+        if(goodsService.findGoodsType(goodsType)==null){
+            goodsService.insertGoodsType(goodsType);
+            goods.setGoodsType(goodsService.findGoodsType(goodsType).toString());
         }else{
             goods.setGoodsType(goodsService.findGoodsType(goodsType).toString());
         }
