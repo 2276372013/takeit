@@ -21,4 +21,7 @@ public interface GoodsDao {
     Integer insertGoodsPlace(GoodsPlace goodsPlace );
     Integer insertGoodsType(GoodsType goodsType);
     List<Goods> selectLikeGoods(@Param("good") Goods good);
+    List<Goods> findGoodsWilltime(String userId);
+    List<Goods> findGoodsPasstime(String userId);
+    Integer updatePassTime(@Param("goodsid") String goodsid,@Param("update") String update);
 }

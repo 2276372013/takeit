@@ -30,6 +30,24 @@ public class GoodsController {
         return returnMsgService.returnMsg(goodsService.findAll(userId));
     }
 
+    @PostMapping("/findGoodsPasstime")
+    @ResponseBody
+    public Msg findGoodsPasstime(@RequestHeader(value = "token") String token) {
+        DecodedJWT verify = JWTUtils.verify(token);
+        String userId = verify.getClaim("userId").asString();
+        return returnMsgService.returnMsg(goodsService.findGoodsPasstime(userId));
+
+    }
+
+    @PostMapping("/findGoodsWilltime")
+    @ResponseBody
+    public Msg findGoodsWilltime(@RequestHeader(value = "token") String token) {
+        DecodedJWT verify = JWTUtils.verify(token);
+        String userId = verify.getClaim("userId").asString();
+        return returnMsgService.returnMsg(goodsService.findGoodsWilltime(userId));
+
+    }
+
     @PostMapping("/insertGoods")
     @ResponseBody
     public Msg insertGoods(@RequestBody Goods goods,@RequestHeader(value = "token") String token) {
@@ -97,13 +115,16 @@ public class GoodsController {
         return returnMsgService.returnMsg(goodsService.selectLikeGoods(goods));
     }
 
+    @RequestMapping(value = "/updatePassTime/{goodsid}/{update}", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg updatePassTime(@PathVariable("goodsid") String goodsid,@PathVariable("update") String update) {
+        return returnMsgService.returnMsg(goodsService.updatePassTime(goodsid,update));
+    }
+
     //测试用请求
     @RequestMapping(value = "/okToken", method = RequestMethod.POST)
     @ResponseBody
     public Msg okToken() {
         return returnMsgService.returnMsg("ok");
     }
-
-
-
 }

@@ -9,6 +9,8 @@ import com.take.takeDemo.Entity.Users;
 import com.take.takeDemo.Service.GoodsService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.Calendar;
 import java.util.List;
 
 @Service
@@ -63,6 +65,21 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public List<Goods> selectLikeGoods(Goods goods) {
         return goodsDao.selectLikeGoods(goods);
+    }
+
+    @Override
+    public List<Goods> findGoodsPasstime(String userId) {
+        return goodsDao.findGoodsPasstime(userId);
+    }
+
+    @Override
+    public List<Goods> findGoodsWilltime(String userId) {
+        return goodsDao.findGoodsWilltime(userId);
+    }
+
+    @Override
+    public Integer updatePassTime(String goodsid, String update) {
+        return goodsDao.updatePassTime(goodsid,update);
     }
 
     @Override

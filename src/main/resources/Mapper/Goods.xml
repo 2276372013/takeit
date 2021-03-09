@@ -54,6 +54,14 @@
         FROM goodstype
         where typeName = #{typeName} and userId = #{userId};
     </select>
+    <!--过期物品 -->
+    <select id="findGoodsPasstime" resultMap="backMap" parameterType="java.lang.String" >
+        select *  from goods where now()>placeTime and userId = #{userId};
+    </select>
+    <!--临期物品 -->
+    <select id="findGoodsWilltime" resultMap="backMap" parameterType="java.lang.String" >
+        select * from goods where now()>SUBDATE(placeTime,interval 7 day) and placeTime>now() and userId = #{userId};
+    </select>
     <!--添加物品位置-->
     <insert id="insertGoodsPlace" parameterType="com.take.takeDemo.Entity.GoodsPlace" useGeneratedKeys="true" keyProperty="placeId">
         insert into goodsPlace (userId,placeName)
@@ -64,6 +72,10 @@
         insert into goodsType (userId,typeName)
         values (#{userId},#{typeName})
     </insert>
+    <!--物品放置到时间延期 -->
+    <update id="updatePassTime" parameterType="java.lang.String">
+        update goods set placeTime = #{update} where goodsId = #{goodsid};
+    </update>
 
     <!--模糊检索 -->
     <select id="selectLikeGoods" resultMap="backMap" parameterType="com.take.takeDemo.Entity.Goods">

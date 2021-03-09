@@ -19,4 +19,7 @@ public interface GoodsService {
     Integer insertGoodsPlace(GoodsPlace goodsPlace);
     Integer insertGoodsType(GoodsType goodsType);
     List<Goods>  selectLikeGoods(Goods goods);
+    List<Goods> findGoodsPasstime(String userId);
+    List<Goods> findGoodsWilltime(String userId);
+    Integer updatePassTime(String goodsid, String update);
 }
