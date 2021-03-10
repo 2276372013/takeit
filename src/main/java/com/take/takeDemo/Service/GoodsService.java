@@ -22,4 +22,6 @@ public interface GoodsService {
     List<Goods> findGoodsPasstime(String userId);
     List<Goods> findGoodsWilltime(String userId);
     Integer updatePassTime(String goodsid, String update);
+    Integer updataGoods(Goods goods);
+    void findInsterTypePlace(Goods goods, String token);
 }

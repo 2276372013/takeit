@@ -77,6 +77,35 @@
         update goods set placeTime = #{update} where goodsId = #{goodsid};
     </update>
 
+    <!-- 修改用户信息 -->
+    <update id="updataGoods" parameterType="Goods">
+        update goods
+        <set>
+            <if test="goodsName!= null">
+                goodsName = #{goodsName}
+            </if>
+            <if test="saveTimes!= null">
+                ,saveTimes = #{saveTimes}
+            </if>
+            <if test="placeTime!= null">
+                ,placeTime = #{placeTime}
+            </if>
+            <if test="goodsPublic!= null">
+                ,goodsPublic = #{goodsPublic}
+            </if>
+            <if test="goodsType!= null">
+                ,goodsType = #{goodsType}
+            </if>
+            <if test="goodsPlace!= null">
+                ,goodsPlace = #{goodsPlace}
+            </if>
+            <if test="goodsDescribe!= null">
+                ,goodsDescribe = #{goodsDescribe}
+            </if>
+        </set>
+        where goodsId = #{goodsId};
+    </update>
+
     <!--模糊检索 -->
     <select id="selectLikeGoods" resultMap="backMap" parameterType="com.take.takeDemo.Entity.Goods">
         SELECT goods.goodsId,goods.goodsName,goods.userId,goods.goodsPlace,goods.takeTime,goods.frequency,goods.goodsType,goods.goodsPhoto,goods.goodsCode,goods.saveTimes,goods.placeTime,goodstype.typeName,goods.goodsDescribe,

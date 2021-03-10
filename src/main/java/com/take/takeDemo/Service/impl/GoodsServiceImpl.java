@@ -1,5 +1,7 @@
 package com.take.takeDemo.Service.impl;
 
+import com.auth0.jwt.interfaces.DecodedJWT;
+import com.take.takeDemo.Common.Util.JWT.JWTUtils;
 import com.take.takeDemo.Common.Util.MD5.MD5Util;
 import com.take.takeDemo.Dao.GoodsDao;
 import com.take.takeDemo.Entity.Goods;
@@ -80,6 +82,41 @@ public class GoodsServiceImpl implements GoodsService {
     @Override
     public Integer updatePassTime(String goodsid, String update) {
         return goodsDao.updatePassTime(goodsid,update);
+    }
+
+    @Override
+    public Integer updataGoods(Goods goods) {
+        return goodsDao.updataGoods(goods);
+    }
+
+    @Override
+    public void findInsterTypePlace(Goods goods, String token) {
+        DecodedJWT verify = JWTUtils.verify(token);
+        String userId = verify.getClaim("userId").asString();
+        goods.setUserId(userId);
+
+        if((goods.getGoodsPlace()!=null)&&(goods.getGoodsPlace()!="")){
+            GoodsPlace goodsPlace = new GoodsPlace();
+            goodsPlace.setPlaceName(goods.getGoodsPlace());
+            goodsPlace.setUserId(userId);
+            if(this.findGoodsPlace(goodsPlace)==null){
+                this.insertGoodsPlace(goodsPlace);
+                goods.setGoodsPlace(this.findGoodsPlace(goodsPlace).toString());
+            }else{
+                goods.setGoodsPlace(this.findGoodsPlace(goodsPlace).toString());
+            }
+        }
+        if((goods.getGoodsType()!=null)&&(goods.getGoodsType()!="")) {
+            GoodsType goodsType = new GoodsType();
+            goodsType.setTypeName(goods.getGoodsType());
+            goodsType.setUserId(userId);
+            if (this.findGoodsType(goodsType) == null) {
+                this.insertGoodsType(goodsType);
+                goods.setGoodsType(this.findGoodsType(goodsType).toString());
+            } else {
+                goods.setGoodsType(this.findGoodsType(goodsType).toString());
+            }
+        }
     }
 
     @Override

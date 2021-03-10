@@ -51,30 +51,7 @@ public class GoodsController {
     @PostMapping("/insertGoods")
     @ResponseBody
     public Msg insertGoods(@RequestBody Goods goods,@RequestHeader(value = "token") String token) {
-        DecodedJWT verify = JWTUtils.verify(token);
-        String userId = verify.getClaim("userId").asString();
-        goods.setUserId(userId);
-
-        GoodsPlace goodsPlace = new GoodsPlace();
-        goodsPlace.setPlaceName(goods.getGoodsPlace());
-        goodsPlace.setUserId(userId);
-        GoodsType goodsType = new GoodsType();
-        goodsType.setTypeName(goods.getGoodsType());
-        goodsType.setUserId(userId);
-
-        if(goodsService.findGoodsPlace(goodsPlace)==null){
-            goodsService.insertGoodsPlace(goodsPlace);
-            goods.setGoodsPlace(goodsService.findGoodsPlace(goodsPlace).toString());
-        }else{
-            goods.setGoodsPlace(goodsService.findGoodsPlace(goodsPlace).toString());
-        }
-        if(goodsService.findGoodsType(goodsType)==null){
-            goodsService.insertGoodsType(goodsType);
-            goods.setGoodsType(goodsService.findGoodsType(goodsType).toString());
-        }else{
-            goods.setGoodsType(goodsService.findGoodsType(goodsType).toString());
-        }
-
+        goodsService.findInsterTypePlace(goods,token);
         Integer artists = goodsService.insertGoods(goods);
         return returnMsgService.returnMsg(artists);
     }
@@ -121,10 +98,19 @@ public class GoodsController {
         return returnMsgService.returnMsg(goodsService.updatePassTime(goodsid,update));
     }
 
+    @RequestMapping(value = "/updataGoods", method = RequestMethod.POST)
+    @ResponseBody
+    public Msg updataGoods(@RequestBody Goods goods,@RequestHeader(value = "token") String token) {
+        goodsService.findInsterTypePlace(goods,token);
+        return returnMsgService.returnMsg(goodsService.updataGoods(goods));
+    }
+
     //测试用请求
     @RequestMapping(value = "/okToken", method = RequestMethod.POST)
     @ResponseBody
     public Msg okToken() {
         return returnMsgService.returnMsg("ok");
     }
+
+
 }

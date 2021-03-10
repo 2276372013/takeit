@@ -24,4 +24,5 @@ public interface GoodsDao {
     List<Goods> findGoodsWilltime(String userId);
     List<Goods> findGoodsPasstime(String userId);
     Integer updatePassTime(@Param("goodsid") String goodsid,@Param("update") String update);
+    Integer updataGoods(Goods goods);
 }
